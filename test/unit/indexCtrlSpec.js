@@ -19,6 +19,6 @@ describe("indexCtrl", function() {
       });
 	  });
 
-    expect(scope.repoUrl).toEqual('https://github.com/aerobatic/angular-seed/');
+    expect(Array.isArray(scope.cities)).toBe(true);
   });
 });
