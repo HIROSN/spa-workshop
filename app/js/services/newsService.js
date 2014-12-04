@@ -15,7 +15,14 @@ angular.module('services').factory('news',
           ttl: 300 // cache for 5 minutes
         }
       }).then(function(resp) {
-        defer.resolve(resp.data);
+        var articles = [];
+
+        angular.forEach(resp.data.responseData.feed.entries, function(article) {
+          article.publishedDate = new Date(article.publishedDate).getTime();
+          articles.push(article);
+        });
+
+        defer.resolve(articles);
       }, function(err) {
         defer.reject(err);
       });
