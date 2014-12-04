@@ -1,26 +1,23 @@
+'use strict';
 
-angular.module('controllers').controller('CityCtrl', function($scope, $routeParams, $log, geoLocation, forecast, news) {
-  'use strict';
+angular.module('controllers').controller('CityCtrl',
+  ['$scope', '$routeParams', '$log', 'geoLocation', 'forecast', 'news',
+  function($scope, $routeParams, $log, geoLocation, forecast, news) {
+    $scope.cityName = $routeParams.city;
 
-  this.cityName = $routeParams.city;
-
-  // Need to assign this to another variable in order to use it in nested contexts.
-  var self = this;
-
-  // Flatten the promise chain for better readability.
-  // http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/
-  geoLocation(this.cityName)
+    geoLocation($scope.cityName)
     .then(function(latLong) {
       return forecast(latLong[0], latLong[1]);
     })
     .then(function(forecast) {
-      self.forecast = forecast.data;
-      return news(self.cityName);
+      $scope.forecast = forecast.data;
+      return news($scope.cityName);
     })
     .then(function(news) {
-      self.news = news;
+      $scope.news = news;
     })
     .catch(function(err) {
       $log.error(err);
     });
-});
+  }]
+);
