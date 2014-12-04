@@ -1,29 +1,40 @@
 'use strict';
 
 angular.module('services').factory('geoLocation',
-  ['$q', '$timeout', function($q, $timeout) {
+  ['$http', '$q', function($http, $q) {
     return function(city) {
-      var deferred = $q.defer();
+      var defer = $q.defer();
 
-      $timeout(function() {
-        switch (city.toLowerCase()) {
-          case "seattle":
-            deferred.resolve([47.6062,-122.3321]);
-            break;
-          case "london":
-            deferred.resolve([51.5171,-0.1062]);
-            break;
-          case "tokyo":
-            deferred.resolve([35.6832,139.8089]);
-            break;
-          case "new york":
-            deferred.resolve([40.7142,-74.0064]);
-            break;
-          default:
-            deferred.reject("Invalid city");
+      $http({
+        method: 'GET',
+        url: '/proxy',
+        params: {
+          url: 'http://query.yahooapis.com/v1/public/yql?q=' +
+            encodeURIComponent('SELECT * FROM geo.places WHERE text="' +
+            city + '" and placeTypeName = "Town"'),
+          cache: true,
+          ttl: 300 // cache for 5 minutes
+        },
+        headers: {
+          accept: 'application/xml'
         }
-      }, 20);
-      return deferred.promise;
+      }).then(function(resp) {
+        defer.resolve(parseGeoLocationXml(resp.data));
+      }, function(err) {
+        defer.reject(err);
+      });
+
+      return defer.promise;
     };
+
+    function parseGeoLocationXml(xmlString) {
+      var parser = new DOMParser();
+      var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+      var latLong = [];
+      var node = xmlDoc.getElementsByTagName('centroid')[0];
+      latLong.push(+node.getElementsByTagName('latitude')[0].innerHTML);
+      latLong.push(+node.getElementsByTagName('longitude')[0].innerHTML);
+      return latLong;
+    }
   }]
 );
