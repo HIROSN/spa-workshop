@@ -33,7 +33,11 @@ module.exports = function(grunt) {
     },
     cssmin: {
       minify: {
-        src: ['bower_components/normalize-css/normalize.css', 'app/css/styles.css'],
+        src: [
+          'bower_components/normalize-css/normalize.css',
+          'app/css/animate.css',
+          'app/css/styles.css'
+        ],
         dest: 'dist/app.min.css'
       }
     },
@@ -83,6 +87,7 @@ module.exports = function(grunt) {
         files: [
           'node_modules/angular/angular.js',
           'node_modules/angular-route/angular-route.js',
+          'node_modules/angular-animate/angular-animate.js',
           'node_modules/angular-mocks/angular-mocks.js',
           'app/js/**/*.js',
           'test/unit/**/*.js'
