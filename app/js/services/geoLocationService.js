@@ -1,10 +1,11 @@
+'use strict';
+
 angular.module('services').factory('geoLocation', function($q, $timeout) {
   // TODO: Enhance this service to use a GeoLocation API such as the Google maps API
   // https://developers.google.com/maps/documentation/javascript/geocoding
 
   // For now just hardcoding the lat/long for our test cities
   return function(city) {
-    var latLong = null;
     var deferred = $q.defer();
 
     // Use a $q resolved to simulate a $http call that returns a promise

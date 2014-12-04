@@ -1,7 +1,8 @@
+'use strict';
+
 angular.module('services', []);
 angular.module('controllers', []);
 angular.module('directives', []);
-
 
 (function() {
   angular.module('spaWorkshop', ['ngRoute', 'Aerobatic', 'services', 'controllers', 'directives', 'templates'])

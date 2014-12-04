@@ -1,3 +1,4 @@
+'use strict';
 
 angular.module('services').factory('forecast', function($q, $http) {
   return function(lat, lng) {

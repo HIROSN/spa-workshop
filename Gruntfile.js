@@ -1,11 +1,28 @@
+'use strict';
+
 module.exports = function(grunt) {
+  var srcFiles = [
+    '**/*.js',
+    '!node_modules/**/*',
+    '!dist/**/*',
+    '!tmp/**/*'
+  ];
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
-      all: ['Gruntfile.js', 'app/js/**/*.js', 'test/**/*.js']
+      all: srcFiles,
+      options: {
+        jshintrc: true
+      }
+    },
+    jscs: {
+      src: srcFiles,
+      options: {
+        preset: 'google'
+      }
     },
     uglify: {
       build: {
@@ -91,6 +108,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['build', 'test']);
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jscs');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-clean');

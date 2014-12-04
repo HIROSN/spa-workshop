@@ -1,3 +1,5 @@
+'use strict';
+
 describe("indexCtrl", function() {
 	var scope, ctrl;
 
