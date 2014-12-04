@@ -6,6 +6,8 @@
 
     <title>Aerobatic SPA Workshop</title>
     <base href="/" />
+    <link rel="stylesheet"
+      href="http://foundation.zurb.com/assets/css/templates/foundation.css"/>
 
     <!-- Consolidated stylesheet for release and individual files in debug -->
     <link data-aero-build="release" rel="stylesheet" href="app.min.css">
@@ -21,11 +23,13 @@
       <section data-ng-view></section>
     </div>
 
-    <footer>
-      <a href="http://www.aerobatic.com/" target="_blank">
-        <img src="images/aerobatic-logo.png">
-      </a>
-    </footer>
+    <div class="row">
+      <footer class="large-8 large-centered columns centered">
+        <a href="http://www.aerobatic.com/" target="_blank">
+          <img src="images/aerobatic-logo.png">
+        </a>
+      </footer>
+    </div>
 
     <!-- Consolidated release script which will be stripped from debug builds  -->
     <div data-aero-build="release">

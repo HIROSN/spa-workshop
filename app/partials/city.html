@@ -1,39 +1,70 @@
-<h1>{{cityName}}</h1>
+<div class="row">
+  <div class="large-8 large-centered columns">
+    <h1>{{cityName}}</h1>
+  </div>
+</div>
 
-<h2>Forecast</h2>
+<div class="row">
+  <div class="large-8 large-centered columns panel">
+    <h3>Currently</h3>
+    <div>{{forecast.currently.summary}}</div>
+    <div>Precipitation: {{forecast.currently.precipProbability * 100 | number:0}}%</div>
+    <div>Temperature: {{forecast.currently.temperature | number:0}}°F</div>
+    <div>Wind Speed: {{forecast.currently.windSpeed | number:0}}mph</div>
+  </div>
+</div>
 
-<h3>Currently</h3>
-<div>{{forecast.currently.summary}}</div>
-<div>Precipitation: {{forecast.currently.precipProbability * 100 | number:0}}%</div>
-<div>Temperature: {{forecast.currently.temperature | number:0}}°F</div>
-<div>Wind Speed: {{forecast.currently.windSpeed | number:0}}mph</div>
+<div class="row">
+  <div class="large-8 large-centered columns panel">
+    <h3>Hourly</h3>
+    <div>{{forecast.hourly.summary}}</div>
+  </div>
+</div>
 
-<h3>Hourly</h3>
-<div>{{forecast.hourly.summary}}</div>
 <div data-ng-repeat="hourly in forecast.hourly.data | limitTo:12">
-  <h4>{{hourly.time * 1000 | date:'h:mm a'}}</h4>
-  <div>{{hourly.summary}}</div>
-  <div>Precipitation: {{hourly.precipProbability * 100 | number:0}}%</div>
-  <div>Temperature: {{hourly.temperature | number:0}}°F</div>
-  <div>Wind Speed: {{hourly.windSpeed | number:0}}mph</div>
+  <div class="row">
+    <div class="large-8 large-centered columns panel">
+      <h4>{{hourly.time * 1000 | date:'h:mm a'}}</h4>
+      <div>{{hourly.summary}}</div>
+      <div>Precipitation: {{hourly.precipProbability * 100 | number:0}}%</div>
+      <div>Temperature: {{hourly.temperature | number:0}}°F</div>
+      <div>Wind Speed: {{hourly.windSpeed | number:0}}mph</div>
+    </div>
+  </div>
 </div>
 
-<h3>Daily</h3>
-<div>{{forecast.daily.summary}}</div>
+<div class="row">
+  <div class="large-8 large-centered columns panel">
+    <h3>Daily</h3>
+    <div>{{forecast.daily.summary}}</div>
+  </div>
+</div>
+
 <div data-ng-repeat="daily in forecast.daily.data | limitTo:7">
-  <h4>{{daily.time * 1000 | date:'EEEE, M/d'}}</h4>
-  <div>{{daily.summary}}</div>
-  <div>Precipitation: {{daily.precipProbability * 100 | number:0}}%</div>
-  <div>Temperature: Low {{daily.temperatureMin | number:0}}°F,
-    High {{daily.temperatureMax | number:0}}°F</div>
-  <div>Wind Speed: {{daily.windSpeed | number:0}}mph</div>
+  <div class="row">
+    <div class="large-8 large-centered columns panel">
+      <h4>{{daily.time * 1000 | date:'EEEE, M/d'}}</h4>
+      <div>{{daily.summary}}</div>
+      <div>Precipitation: {{daily.precipProbability * 100 | number:0}}%</div>
+      <div>Temperature: Low {{daily.temperatureMin | number:0}}°F,
+        High {{daily.temperatureMax | number:0}}°F</div>
+      <div>Wind Speed: {{daily.windSpeed | number:0}}mph</div>
+    </div>
+  </div>
 </div>
 
-<h2>News</h2>
-<div data-ng-repeat="article in news.responseData.feed.entries">
-  <a href="{{article.link}}" target="_blank">
-    <h3>{{article.title}}</h3>
-  </a>
-  <div>{{article.contentSnippet}}</div>
-  <div>{{article.publishedDate}}</div>
+<div class="row">
+  <div class="large-8 large-centered columns">
+    <h2>News</h2>
+  </div>
+</div>
+
+<div class="row" data-ng-repeat="article in news.responseData.feed.entries">
+  <div class="large-8 large-centered columns panel">
+    <a href="{{article.link}}" target="_blank">
+      <h3>{{article.title}}</h3>
+    </a>
+    <div>{{article.publishedDate}}</div>
+    <div>{{article.contentSnippet}}</div>
+  </div>
 </div>

@@ -1,6 +1,13 @@
-<div>
-  <h2>Cities</h2>
-  <ul data-ng-repeat="city in cities">
-    <li><a data-ng-href="/cities/{{city}}">{{city}}</a>
-  </ul>
+<div class="row">
+  <div class="large-8 large-centered columns">
+    <h1 class="centered">Cities</h1>
+  </div>
+</div>
+
+<div class="row" data-ng-repeat="city in cities">
+  <a data-ng-href="/cities/{{city}}">
+    <div class="large-8 large-centered columns panel">
+      <h3 class="centered">{{city}}</h3>
+    </div>
+  </a>
 </div>

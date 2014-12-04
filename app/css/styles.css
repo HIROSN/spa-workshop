@@ -1,9 +1,7 @@
-body {
-  padding: 100px;
-  font-family: 'Open Sans',sans-serif;
-  background-color: #FFF;
-}
-
 footer img {
   width: 70px;
+}
+
+.centered {
+  text-align: center;
 }
