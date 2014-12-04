@@ -19,3 +19,7 @@ footer img {
   padding-bottom: 0.5em;
   margin-bottom: 1em;
 }
+
+.summary {
+  min-height: 3em;
+}
