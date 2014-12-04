@@ -32,8 +32,10 @@ angular.module('services').factory('geoLocation',
       var xmlDoc = parser.parseFromString(xmlString, 'text/xml');
       var latLong = [];
       var node = xmlDoc.getElementsByTagName('centroid')[0];
-      latLong.push(+node.getElementsByTagName('latitude')[0].innerHTML);
-      latLong.push(+node.getElementsByTagName('longitude')[0].innerHTML);
+      var latitude = node.getElementsByTagName('latitude')[0];
+      var longitude = node.getElementsByTagName('longitude')[0];
+      latLong.push(+(latitude.innerHTML || latitude.textContent));
+      latLong.push(+(longitude.innerHTML || longitude.textContent));
       return latLong;
     }
   }]
