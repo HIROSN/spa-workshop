@@ -1,7 +1,33 @@
 <h1>{{cityName}}</h1>
 
-<h3>Forecast</h3>
-<div>{{forecast | json}}</div>
+<h2>Forecast</h2>
 
-<h3>News</h3>
+<h3>Currently</h3>
+<div>{{forecast.currently.summary}}</div>
+<div>Precipitation: {{forecast.currently.precipProbability * 100 | number:0}}%</div>
+<div>Temperature: {{forecast.currently.temperature | number:0}}°F</div>
+<div>Wind Speed: {{forecast.currently.windSpeed | number:0}}mph</div>
+
+<h3>Hourly</h3>
+<div>{{forecast.hourly.summary}}</div>
+<div data-ng-repeat="hourly in forecast.hourly.data | limitTo:8">
+  <h4>{{hourly.time * 1000 | date:'h:mm a'}}</h4>
+  <div>{{hourly.summary}}</div>
+  <div>Precipitation: {{hourly.precipProbability * 100 | number:0}}%</div>
+  <div>Temperature: {{hourly.temperature | number:0}}°F</div>
+  <div>Wind Speed: {{hourly.windSpeed | number:0}}mph</div>
+</div>
+
+<h3>Daily</h3>
+<div>{{forecast.daily.summary}}</div>
+<div data-ng-repeat="daily in forecast.daily.data | limitTo:7">
+  <h4>{{daily.time * 1000 | date:'EEEE, M/d'}}</h4>
+  <div>{{daily.summary}}</div>
+  <div>Precipitation: {{daily.precipProbability * 100 | number:0}}%</div>
+  <div>Temperature: Low {{daily.temperatureMin | number:0}}°F,
+    High {{daily.temperatureMax | number:0}}°F</div>
+  <div>Wind Speed: {{daily.windSpeed | number:0}}mph</div>
+</div>
+
+<h2>News</h2>
 <div>{{news | json}}</div>
