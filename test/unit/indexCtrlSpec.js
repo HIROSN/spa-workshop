@@ -1,26 +1,22 @@
 'use strict';
 
-describe("indexCtrl", function() {
-	var scope, ctrl;
+describe('indexCtrl', function() {
+  var $controllerConstructor;
+	var $scope;
 
 	beforeEach(function() {
-		// We need to define a global variable to prevent our app from breaking
 		window.__config__ = {};
-
-		// module('angularSeed');
 		module('controllers');
+
+    inject(function($rootScope, $controller) {
+      $scope = $rootScope.$new();
+      $controllerConstructor = $controller;
+    });
 	});
 
 	it('should have a properly working IndexCtrl', function() {
-    inject(function($rootScope, $controller) {
-      scope = $rootScope.$new();
-
-      ctrl = $controller("IndexCtrl", {
-        $scope: scope,
-				aerobatic: { cdnUrl: 'http://cdn.com' }
-      });
-	  });
-
-    expect(Array.isArray(scope.cities)).toBe(true);
+    $controllerConstructor('IndexCtrl', {$scope: $scope});
+    expect(Array.isArray($scope.cities)).toBe(true);
+    expect($scope.cities.length).toBeTruthy();
   });
 });

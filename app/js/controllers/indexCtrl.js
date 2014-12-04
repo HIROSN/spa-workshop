@@ -1,5 +1,7 @@
 'use strict';
 
-angular.module('controllers').controller('IndexCtrl', function($scope) {
-  $scope.cities = ['Seattle', 'New York', 'London', 'Tokyo', 'Boston'];
-});
+angular.module('controllers').controller('IndexCtrl',
+  ['$scope', function($scope) {
+    $scope.cities = ['Seattle', 'New York', 'London', 'Tokyo', 'Boston'];
+  }]
+);
