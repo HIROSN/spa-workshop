@@ -10,7 +10,7 @@
 
 <h3>Hourly</h3>
 <div>{{forecast.hourly.summary}}</div>
-<div data-ng-repeat="hourly in forecast.hourly.data | limitTo:8">
+<div data-ng-repeat="hourly in forecast.hourly.data | limitTo:12">
   <h4>{{hourly.time * 1000 | date:'h:mm a'}}</h4>
   <div>{{hourly.summary}}</div>
   <div>Precipitation: {{hourly.precipProbability * 100 | number:0}}%</div>
