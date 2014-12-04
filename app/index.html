@@ -1,6 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
     <title>Aerobatic SPA Workshop</title>
     <base href="/" />
 
@@ -17,6 +20,12 @@
     <div ng-app="spaWorkshop">
       <section ng-view></section>
     </div>
+
+    <footer>
+      <a href="http://www.aerobatic.com/" target="_blank">
+        <img src="images/aerobatic-logo.png">
+      </a>
+    </footer>
 
     <!-- Consolidated release script which will be stripped from debug builds  -->
     <div data-aero-build="release">

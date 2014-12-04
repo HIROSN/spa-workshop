@@ -3,3 +3,7 @@ body {
   font-family: 'Open Sans',sans-serif;
   background-color: #FFF;
 }
+
+footer img {
+  width: 70px;
+}
