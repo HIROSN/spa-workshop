@@ -11,6 +11,7 @@
     "afterEach"  : false,
     "equal"      : false,
     "window"     : false,
+    "navigator"  : false,
     "DOMParser"  : false,
     "angular"    : false,
     "inject"     : false,

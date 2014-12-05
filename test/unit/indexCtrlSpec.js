@@ -6,6 +6,7 @@ describe('indexCtrl', function() {
 
 	beforeEach(function() {
 		window.__config__ = {};
+    module('services');
 		module('controllers');
 
     inject(function($rootScope, $controller) {
