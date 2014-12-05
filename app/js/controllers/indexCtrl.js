@@ -2,7 +2,7 @@
 
 angular.module('controllers').controller('IndexCtrl', ['$scope', '$log',
   'geoReverseCoding', function($scope, $log, geoReverseCoding) {
-    $scope.cities = ['Seattle', 'New York', 'London', 'Tokyo'];
+    $scope.cities = ['Seattle', 'Delhi', 'Dublin', 'Tokyo'];
     if (!navigator.geolocation) { return; }
 
     navigator.geolocation.getCurrentPosition(function(position) {
