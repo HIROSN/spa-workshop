@@ -8,9 +8,11 @@
   <div class="large-8 large-centered columns panel">
     <h3>Currently</h3>
     <div class="summary">{{forecast.currently.summary}}</div>
-    <div>Precipitation: {{forecast.currently.precipProbability * 100 | number:0}}%</div>
-    <div>Temperature: {{forecast.currently.temperature | number:0}}°F</div>
-    <div>Wind Speed: {{forecast.currently.windSpeed | number:0}}mph</div>
+    <div data-ng-show="forecast.currently">
+      <div>Precipitation: {{forecast.currently.precipProbability * 100 | number:0}}%</div>
+      <div>Temperature: {{forecast.currently.temperature | number:0}}°F</div>
+      <div>Wind Speed: {{forecast.currently.windSpeed | number:0}}mph</div>
+    </div>
   </div>
 </div>
 

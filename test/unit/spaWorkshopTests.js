@@ -22,13 +22,7 @@ describe('spaWorkshop', function() {
     $httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('should have a properly working IndexCtrl', function() {
-    $controllerConstructor('IndexCtrl', {$scope: $scope});
-    expect(Array.isArray($scope.cities)).toBe(true);
-    expect($scope.cities.length).toBeTruthy();
-  });
-
-  it('should parse geolocation xml correctly', inject(function(geoLocation) {
+  var mockGeoLocationResponse = function() {
     var request = '/proxy?cache=true&ttl=300&url=http:%2F%2Fquery.yahooapis.' +
       'com%2Fv1%2Fpublic%2Fyql%3Fq%3DSELECT%2520*%2520FROM%2520geo.' +
       'places%2520WHERE%2520text%253D%2522Seattle%2522%2520and%2520' +
@@ -46,25 +40,20 @@ describe('spaWorkshop', function() {
         '</results>' +
       '</query>'
     );
+  };
 
-    geoLocation('Seattle')
-    .then(function(latLong) {
-      expect(latLong).toBeTruthy();
-      expect(Array.isArray(latLong)).toBe(true);
-      expect(latLong.length).toBe(2);
-      expect(typeof latLong[0]).toBe('number');
-      expect(typeof latLong[1]).toBe('number');
-      expect(latLong[0]).toBeTruthy();
-      expect(latLong[1]).toBeTruthy();
-    })
-    .catch(function(err) {
-      expect(err).toBe(null);
+  var mockForecastResponse = function() {
+    var request = '/proxy?cache=1&ttl=300&url=https:%2F%2Fapi.forecast.' +
+      'io%2Fforecast%2F@@FORECAST_IO_API_KEY@@%2F47.603561,-122.329437';
+
+    $httpBackend.when('GET', request).respond({
+      currently: {},
+      hourly: {data: []},
+      daily: {data: []}
     });
+  };
 
-    $httpBackend.flush();
-  }));
-
-  it('should update publishedDate to a number', inject(function(news) {
+  var mockNewsResponse = function() {
     var request = '/proxy?cache=true&ttl=300&url=https:%2F%2Fajax.' +
       'googleapis.com%2Fajax%2Fservices%2Ffeed%2Fload%3Fv%3D1.0%26q%3D' +
       'http:%2F%2Fnews.google.com%2Fnews%2Ffeeds%3Fgeo%3DSeattle';
@@ -84,6 +73,36 @@ describe('spaWorkshop', function() {
         }
       }
     });
+  };
+
+  it('should have a properly working IndexCtrl', function() {
+    $controllerConstructor('IndexCtrl', {$scope: $scope});
+    expect(Array.isArray($scope.cities)).toBe(true);
+    expect($scope.cities.length).toBeTruthy();
+  });
+
+  it('should parse geolocation xml correctly', inject(function(geoLocation) {
+    mockGeoLocationResponse();
+
+    geoLocation('Seattle')
+    .then(function(latLong) {
+      expect(latLong).toBeTruthy();
+      expect(Array.isArray(latLong)).toBe(true);
+      expect(latLong.length).toBe(2);
+      expect(typeof latLong[0]).toBe('number');
+      expect(typeof latLong[1]).toBe('number');
+      expect(latLong[0]).toBeTruthy();
+      expect(latLong[1]).toBeTruthy();
+    })
+    .catch(function(err) {
+      expect(err).toBe(null);
+    });
+
+    $httpBackend.flush();
+  }));
+
+  it('should update publishedDate to a number', inject(function(news) {
+    mockNewsResponse();
 
     news('Seattle')
     .then(function(news) {
@@ -99,4 +118,27 @@ describe('spaWorkshop', function() {
 
     $httpBackend.flush();
   }));
+
+  it('should have a properly working CityCtrl', function() {
+    mockGeoLocationResponse();
+    mockForecastResponse();
+    mockNewsResponse();
+
+    $controllerConstructor('CityCtrl', {
+      $scope: $scope,
+      $routeParams: {city: 'Seattle'}
+    });
+
+    $httpBackend.flush();
+    expect($scope.forecast).toBeTruthy();
+    expect($scope.forecast.currently).toBeTruthy();
+    expect($scope.forecast.hourly).toBeTruthy();
+    expect($scope.forecast.hourly.data).toBeTruthy();
+    expect(Array.isArray($scope.forecast.hourly.data)).toBe(true);
+    expect($scope.forecast.daily).toBeTruthy();
+    expect($scope.forecast.daily.data).toBeTruthy();
+    expect(Array.isArray($scope.forecast.daily.data)).toBe(true);
+    expect($scope.news).toBeTruthy();
+    expect(typeof $scope.news[0].publishedDate).toBe('number');
+  });
 });
