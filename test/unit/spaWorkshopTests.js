@@ -29,7 +29,6 @@ describe('spaWorkshop', function() {
   });
 
   it('should parse geolocation xml correctly', inject(function(geoLocation) {
-
     var request = '/proxy?cache=true&ttl=300&url=http:%2F%2Fquery.yahooapis.' +
       'com%2Fv1%2Fpublic%2Fyql%3Fq%3DSELECT%2520*%2520FROM%2520geo.' +
       'places%2520WHERE%2520text%253D%2522Seattle%2522%2520and%2520' +
@@ -57,6 +56,42 @@ describe('spaWorkshop', function() {
       expect(typeof latLong[1]).toBe('number');
       expect(latLong[0]).toBeTruthy();
       expect(latLong[1]).toBeTruthy();
+    })
+    .catch(function(err) {
+      expect(err).toBe(null);
+    });
+
+    $httpBackend.flush();
+  }));
+
+  it('should update publishedDate to a number', inject(function(news) {
+    var request = '/proxy?cache=true&ttl=300&url=https:%2F%2Fajax.' +
+      'googleapis.com%2Fajax%2Fservices%2Ffeed%2Fload%3Fv%3D1.0%26q%3D' +
+      'http:%2F%2Fnews.google.com%2Fnews%2Ffeeds%3Fgeo%3DSeattle';
+
+    $httpBackend.when('GET', request).respond({
+      responseData: {
+        feed: {
+          entries: [{
+            title: 'Seattle news',
+            link: 'http://news.google.com/',
+            author: '',
+            publishedDate: 'Thu, 04 Dec 2014 21:51:32 -0800',
+            contentSnippet: '...',
+            content: '<table><tr><td></td></tr></table>',
+            categories: []
+          }]
+        }
+      }
+    });
+
+    news('Seattle')
+    .then(function(news) {
+      expect(news).toBeTruthy();
+      expect(Array.isArray(news)).toBe(true);
+      expect(news.length).toBe(1);
+      expect(news[0].publishedDate).toBeTruthy();
+      expect(typeof news[0].publishedDate).toBe('number');
     })
     .catch(function(err) {
       expect(err).toBe(null);
