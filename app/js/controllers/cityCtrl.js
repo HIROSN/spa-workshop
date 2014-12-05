@@ -11,8 +11,12 @@ angular.module('controllers').controller('CityCtrl',
     })
     .then(function(forecast) {
       $scope.forecast = forecast.data;
-      return news($scope.cityName);
     })
+    .catch(function(err) {
+      $log.error(err);
+    });
+
+    news($scope.cityName)
     .then(function(news) {
       $scope.news = news;
     })
