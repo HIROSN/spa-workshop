@@ -8,7 +8,14 @@ angular.module('controllers').controller('IndexCtrl', ['$scope', '$log',
     navigator.geolocation.getCurrentPosition(function(position) {
       geoReverseCoding(position.coords.latitude, position.coords.longitude)
       .then(function(address) {
-        if (address.city) { $scope.cities.unshift(address.city); }
+        if (!address.city) { return; }
+        var exists = false;
+
+        angular.forEach($scope.cities, function(city) {
+          exists = exists || city === address.city;
+        });
+
+        if (!exists) { $scope.cities.unshift(address.city); }
       })
       .catch(function(err) {
         $log.error(err);
