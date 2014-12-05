@@ -130,15 +130,9 @@ describe('spaWorkshop', function() {
     });
 
     $httpBackend.flush();
-    expect($scope.forecast).toBeTruthy();
     expect($scope.forecast.currently).toBeTruthy();
-    expect($scope.forecast.hourly).toBeTruthy();
-    expect($scope.forecast.hourly.data).toBeTruthy();
     expect(Array.isArray($scope.forecast.hourly.data)).toBe(true);
-    expect($scope.forecast.daily).toBeTruthy();
-    expect($scope.forecast.daily.data).toBeTruthy();
     expect(Array.isArray($scope.forecast.daily.data)).toBe(true);
-    expect($scope.news).toBeTruthy();
     expect(typeof $scope.news[0].publishedDate).toBe('number');
   });
 });
