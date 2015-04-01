@@ -1,8 +1,15 @@
-# SPA Workshop
-
-http://hirosn-spa-workshop.aerobaticapp.com
-
+## Cities
 <img src="https://travis-ci.org/HIROSN/spa-workshop.svg" alt="Travis CI Badge"></img>
+
+Upstream: http://hirosn-spa-workshop.aerobaticapp.com
+
+PaaS: Aerobatic
+
+Dependencies: angular
+
+Tests: karma, phantomjs
+
+## SPA Workshop
 
 In this workshop you'll be building and deploying an AngularJS single page application on the Aerobatic platform. The app itself is a city portal that displays local information for various cities around the world. This repo provides the basic scaffolding that you can fork to get started. It retrieves the weather for a given city using the [forecast.io API](https://developer.forecast.io/) and local news headlines using the Google News RSS feed. You can see a live demo of this starter template at [http://spa-workshop.aerobaticapp.com](http://spa-workshop.aerobaticapp.com).
 
