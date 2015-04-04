@@ -9,6 +9,10 @@ Dependencies: angular
 
 Tests: karma, phantomjs
 
+Demonstrates:
+- Angular directives and filters
+- Angular dependency injection and unit testing using Karma
+
 ## SPA Workshop
 
 In this workshop you'll be building and deploying an AngularJS single page application on the Aerobatic platform. The app itself is a city portal that displays local information for various cities around the world. This repo provides the basic scaffolding that you can fork to get started. It retrieves the weather for a given city using the [forecast.io API](https://developer.forecast.io/) and local news headlines using the Google News RSS feed. You can see a live demo of this starter template at [http://spa-workshop.aerobaticapp.com](http://spa-workshop.aerobaticapp.com).
