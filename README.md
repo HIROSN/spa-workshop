@@ -5,13 +5,14 @@ Upstream: http://hirosn-spa-workshop.aerobaticapp.com
 
 PaaS: Aerobatic
 
-Dependencies: angular
+Dependencies: angular, foundation-sites
 
 Tests: karma, phantomjs
 
 Demonstrates:
 - Angular directives and filters
 - Angular dependency injection and unit testing using Karma
+- Foundation grid layout
 
 ## SPA Workshop
 

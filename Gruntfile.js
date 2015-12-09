@@ -69,7 +69,11 @@ module.exports = function(grunt) {
         files: [
           {src: 'app/index.html', dest: 'dist/index.html'},
           {src: 'app/favicon.ico', dest: 'dist/favicon.ico'},
-          {expand: true, cwd:'app', src: ['images/**'], dest: 'dist/'}
+          {expand: true, cwd:'app', src: ['images/**'], dest: 'dist/'},
+          {
+            src: 'node_modules/foundation-sites/dist/foundation.min.css',
+            dest: 'dist/foundation.min.css'
+          }
         ]
       }
     },
